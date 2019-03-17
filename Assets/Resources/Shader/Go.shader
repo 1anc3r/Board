@@ -28,27 +28,27 @@
             uniform float _gridSpace;
             uniform float _gridCount;
 
-            struct appdata
+            struct vertexInput
             {
                 float4 vertex : POSITION;
                 float2 texcoord0 : TEXCOORD0;
             };
 
-            struct v2f
+            struct fragmentInput
             {
                 float4 vertex : SV_POSITION;
                 float2 texcoord0 : TEXCOORD0;
             };
 
-            v2f vert(appdata v)
+            fragmentInput vert(vertexInput i)
             {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.texcoord0 = v.texcoord0;
+                fragmentInput o;
+                o.vertex = UnityObjectToClipPos(i.vertex);
+                o.texcoord0 = i.texcoord0;
                 return o;
             }
 
-            float4 frag(v2f i) : COLOR
+            float4 frag(fragmentInput i) : COLOR
             {
                 float2 r = 2.0 * i.texcoord0;
                 float4 color = _originColor;
